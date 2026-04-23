@@ -17,6 +17,7 @@ public class Player2DController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -29,6 +30,9 @@ public class Player2DController : MonoBehaviour
         }
 
         rb.linearVelocity = new Vector2(moveInputValue * speed, rb.linearVelocity.y);
+
+        if (moveInputValue < 0) { spriteRenderer.flipX = true; }
+        else if (moveInputValue > 0) { spriteRenderer.flipX = false; }
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
         {
